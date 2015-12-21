@@ -1,20 +1,15 @@
 import media
 import json
 from pprint import pprint
+import fresh_tomatoes
 
-movie_list = []
+if __name__ == "__main__":
 
-with open('movie_info.json') as jsonfile:
-    movie_info = json.load(jsonfile)
+    # Instantiate a factory class to build a list of movie objects
+    mb = media.MovieBuilder()
+    # MovieBuilder has access to a json file with the values necessary to
+    # build the movie objects
+    movie_list = mb.get_list_of_movies()
+    # Dynamically generate html content using fresh_tomatoes.py
+    fresh_tomatoes.open_movies_page(movie_list)
 
-for title, info in movie_info.items():
-    data = {}
-    data["title"] = title
-    data["trailer_url"] = info["youtube trailer"]
-    data["img_url"] = info["poster image url"]
-    movie = media.Movie(data)
-    movie_list.append(movie)
-
-print(movie_list)
-
-# toy_story = media.Movie()
